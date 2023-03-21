@@ -3,7 +3,8 @@
 	"package": "com.nicoislost.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"TrendOMixin"
+		"TrendOMixin",
+		"FovChanger"
 	],
 	"injectors": {
 		"defaultRequire": 1
