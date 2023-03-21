@@ -1,15 +1,28 @@
 {
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/66rV5hanFP"
+			},
+			"parent": {
+				"id": "zoom-o-matic",
+				"name": "Zoom O matic"
+			},
+			"update_checker": false
+		}
+	},
 	"schemaVersion": 1,
 	"id": "zoom-o-matic",
 	"version": "${version}",
 	"name": "Zoom-o-Matic",
 	"description": "A simple, but customizable multi-button zoom tool for Minecraft.",
 	"authors": [
-		"Nico Is LOST & Fej1Fun"
+		"Nico Is LOST",
+		"Fej1Fun"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/NicoIsLost/Zoom-o-Matic",
+		"issues": "https://github.com/NicoIsLost/Zoom-o-Matic/issues"
 	},
 	"license": "MIT License",
 	"icon": "assets/zoom-o-matic/icon.png",
