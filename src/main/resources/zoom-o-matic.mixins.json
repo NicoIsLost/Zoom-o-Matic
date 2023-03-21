@@ -3,7 +3,7 @@
 	"package": "com.nicoislost.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"TrendOMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
