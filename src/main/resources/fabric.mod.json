@@ -2,25 +2,29 @@
 	"schemaVersion": 1,
 	"id": "zoom-o-matic",
 	"version": "${version}",
-	"name": "zoom-o-matic",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Zoom-o-Matic",
+	"description": "A simple, but customizable multi-button zoom tool for Minecraft.",
 	"authors": [
-		"Me!"
+		"Nico Is LOST & Fej1Fun"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT License",
 	"icon": "assets/zoom-o-matic/icon.png",
-	"environment": "client",
+	"environment": "*",
 	"entrypoints": {
 		"client": [
 			"com.nicoislost.TrendO"
 		]
 	},
 	"mixins": [
-		"zoom-o-matic.mixins.json"
+		"zoom-o-matic.mixins.json",
+		{
+			"config": "zoom-o-matic.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": ">=0.14.17",
