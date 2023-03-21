@@ -33,9 +33,8 @@
 		]
 	},
 	"mixins": [
-		"zoom-o-matic.mixins.json",
 		{
-			"config": "zoom-o-matic.client.mixins.json",
+			"config": "zoom-o-matic.mixins.json",
 			"environment": "client"
 		}
 	],
