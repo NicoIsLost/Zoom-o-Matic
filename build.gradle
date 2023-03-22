@@ -13,6 +13,7 @@ group = project.maven_group
 
 repositories {
 	maven { url "https://maven.terraformersmc.com/releases/" }
+	maven { url 'https://maven.wispforest.io' }
 	mavenCentral()
 }
 
@@ -24,6 +25,10 @@ dependencies {
 
 	//Mod Menu
 	modApi "com.terraformersmc:modmenu:6.1.0-rc.4"
+
+	//owo
+	annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
+	include "io.wispforest:owo-sentinel:${project.owo_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"

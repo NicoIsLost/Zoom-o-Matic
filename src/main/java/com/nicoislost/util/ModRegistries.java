@@ -10,7 +10,5 @@ public class ModRegistries {
         registerCommands();
     }
 
-    private static void registerCommands() {
-        CommandRegistrationCallback.EVENT.register(ZoomAmountCommand::register);
-    }
+    private static void registerCommands() {CommandRegistrationCallback.EVENT.register(ZoomAmountCommand::register);}
 }
