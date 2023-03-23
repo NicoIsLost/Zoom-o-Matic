@@ -12,6 +12,8 @@ public class TrendO implements ClientModInitializer {
 	public void onInitializeClient() {
 
 		ModRegistries.registerModPackages();
+
+		CONFIG.Zoom1(69);
 	}
 
 }
