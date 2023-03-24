@@ -9,9 +9,7 @@ import static com.mojang.brigadier.arguments.IntegerArgumentType.getInteger;
 import static com.mojang.brigadier.arguments.IntegerArgumentType.integer;
 import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 import static com.mojang.brigadier.arguments.BoolArgumentType.bool;
-import static com.nicoislost.TrendO.CONFIG;
-
-import com.nicoislost.owo.ZoomOConfig;
+import static com.nicoislost.ZoomO.CONFIG;
 
 public class ZoomAmountCommand {
     public static void register(
