@@ -8,5 +8,6 @@
   "text.config.Zoom-O-Config.option.Zoom2": "Zoom 2",
   "text.config.Zoom-O-Config.option.Zoom2SmoothCamera": "zoom 2 Smooth Camera",
   "text.config.Zoom-O-Config.option.Zoom3": "Zoom 3",
-  "text.config.Zoom-O-Config.option.Zoom3SmoothCamera": "Zoom 3 Smooth Camera"
+  "text.config.Zoom-O-Config.option.Zoom3SmoothCamera": "Zoom 3 Smooth Camera",
+  "command.exception.between": "The value must be between 0 and 99"
 }

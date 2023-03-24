@@ -15,15 +15,15 @@ public class ZoomOMixin {
 	private void getZoomLevel(CallbackInfoReturnable<Double> callbackInfo) {
 		if (ZoomO.isZooming1()){
 			double fov = callbackInfo.getReturnValue();
-			callbackInfo.setReturnValue(fov * CONFIG.Zoom1()/100);
+			callbackInfo.setReturnValue(fov * (1 - (double)CONFIG.Zoom1()/100));
 		}
 		if (ZoomO.isZooming2()) {
 			double fov = callbackInfo.getReturnValue();
-			callbackInfo.setReturnValue(fov * CONFIG.Zoom2() / 100);
+			callbackInfo.setReturnValue(fov * (1 - (double)CONFIG.Zoom2() / 100));
 		}
 		if (ZoomO.isZooming3()) {
 			double fov = callbackInfo.getReturnValue();
-			callbackInfo.setReturnValue(fov * CONFIG.Zoom3() / 100);
+			callbackInfo.setReturnValue(fov * (1 - (double)CONFIG.Zoom3() / 100));
 		}
 	}
 }
