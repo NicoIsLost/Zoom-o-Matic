@@ -5,6 +5,7 @@ import com.nicoislost.owo.ZoomOConfig;
 import com.nicoislost.util.ModRegistries;
 import net.fabricmc.api.ClientModInitializer;
 
+import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +28,6 @@ public class ZoomO implements ClientModInitializer {
 
 	public static int zoomModiferNum() {
 
-		LOGGER.info(String.valueOf(keyNum()));
-		LOGGER.info(String.valueOf(keyTotNum()));
 		if (keyTotNum() == 0) {
 			return 0;
 		} else if (keyTotNum() == 1) {
@@ -104,5 +103,24 @@ public class ZoomO implements ClientModInitializer {
 		zoomOrder[0] = 0;
 		zoomOrder[1] = 0;
 		zoomOrder[2] = 0;
+	}
+
+	public static void smooothDuuude(int zoomNum) {
+		if (isZooming() && !MinecraftClient.getInstance().options.smoothCameraEnabled && smoothChecker(zoomModiferNum())) {
+			MinecraftClient.getInstance().options.smoothCameraEnabled = true;
+		} else if ((!isZooming() && MinecraftClient.getInstance().options.smoothCameraEnabled) || !smoothChecker(zoomModiferNum())) {
+			MinecraftClient.getInstance().options.smoothCameraEnabled = false;
+		}
+	}
+
+	public static boolean smoothChecker(int zoomNum) {
+		if (zoomNum == 1) {
+			return CONFIG.Zoom1SmoothCamera();
+		} else if (zoomNum == 2) {
+			return CONFIG.Zoom2SmoothCamera();
+		} else if (zoomNum == 3) {
+			return CONFIG.Zoom3SmoothCamera();
+		}
+		return false;
 	}
 }

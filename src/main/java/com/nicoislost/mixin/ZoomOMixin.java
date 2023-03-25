@@ -16,5 +16,7 @@ public class ZoomOMixin {
 			double fov = callbackInfo.getReturnValue();
 			callbackInfo.setReturnValue(fov * (1 - ZoomO.ZoomModifier(ZoomO.zoomModiferNum())/100));
 		}
+
+		ZoomO.smooothDuuude(ZoomO.zoomModiferNum());
 	}
 }
