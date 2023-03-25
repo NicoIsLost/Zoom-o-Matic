@@ -15,17 +15,19 @@ public class ZoomO implements ClientModInitializer {
 		ModRegistries.registerModPackages();
 	}
 
-	public static boolean isZooming1() {
-		if(KeyBinds.keyBinding1.isPressed()) {return true;}
-		return false;
-	}
-	public static boolean isZooming2() {
-		if(KeyBinds.keyBinding2.isPressed()) {return true;}
-		return false;
-	}
-	public static boolean isZooming3() {
-		if(KeyBinds.keyBinding3.isPressed()) {return true;}
+	public static boolean isZooming() {
+		if(KeyBinds.keyBinding1.isPressed() || KeyBinds.keyBinding2.isPressed() || KeyBinds.keyBinding3.isPressed()) {return true;}
 		return false;
 	}
 
+	public static double zoomModifer() {
+		if(KeyBinds.keyBinding1.isPressed()) {
+			return (double)CONFIG.Zoom1();
+		} else if (KeyBinds.keyBinding2.isPressed()) {
+			return (double)CONFIG.Zoom2();
+		} else if (KeyBinds.keyBinding3.isPressed()) {
+			return (double)CONFIG.Zoom3();
+		}
+		return 0;
+	}
 }
