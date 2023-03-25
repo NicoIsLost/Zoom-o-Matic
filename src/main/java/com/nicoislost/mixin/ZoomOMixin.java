@@ -17,7 +17,7 @@ public class ZoomOMixin {
 	private void getZoomLevel(CallbackInfoReturnable<Double> callbackInfo) {
 		if (ZoomO.isZooming()){
 			double fov = callbackInfo.getReturnValue();
-			callbackInfo.setReturnValue(fov * (1 - (double)zoomModifer()/100));
+			callbackInfo.setReturnValue(fov * (1 - zoomModifer()/100));
 		}
 	}
 }
