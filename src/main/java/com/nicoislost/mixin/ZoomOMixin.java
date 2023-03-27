@@ -1,5 +1,6 @@
 package com.nicoislost.mixin;
 
+
 import com.nicoislost.ZoomO;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(GameRenderer.class)
+
 public class ZoomOMixin {
 	@Inject(at = @At("RETURN"), method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",cancellable = true)
 	private void getZoomLevel(CallbackInfoReturnable<Double> callbackInfo) {
@@ -18,5 +20,6 @@ public class ZoomOMixin {
 		}
 
 		ZoomO.smooothDuuude(ZoomO.zoomModifierNum());
+		//Sets smoothness based on the settings in owo
 	}
 }

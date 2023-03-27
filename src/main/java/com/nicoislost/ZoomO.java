@@ -1,18 +1,11 @@
 package com.nicoislost;
 
-//Internal dependencies
 import com.nicoislost.inputs.KeyBinds;
 import com.nicoislost.owo.ZoomOConfig;
 import com.nicoislost.util.ModRegistries;
 
-//Fabric / MC dependencies
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
-
-//Troubleshooting logger dependencies
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-
 
 public class ZoomO implements ClientModInitializer { //Mod initializer
 
@@ -20,50 +13,37 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 	//this is the call to the configuration
 	//https://docs.wispforest.io/owo/setup/
 	public static final ZoomOConfig CONFIG = ZoomOConfig.createAndLoad();
-
-	//public static final Logger LOGGER = LoggerFactory.getLogger("modid"); // Used for troubleshooting
-
 	private static final int[] zoomOrder = {0,0,0};
-	// Used in zoomModifierNum(), saves the order in which the zoom keys were pressed.
 
 	@Override
 	public void onInitializeClient() {
 		ModRegistries.registerModPackages();
-	} //Loads our mod registries (for good organization)
+	}
 
 	public static boolean isZooming() {
-		return KeyBinds.keyBinding1.isPressed() || KeyBinds.keyBinding2.isPressed() || KeyBinds.keyBinding3.isPressed();
+		return key1() || key2() || key3();
 	}
-	// Are any of the three keys pressed?
-
 
 	public static int zoomModifierNum() {
-
 		// This function determines which zoom setting should be used and outputs it as a number 1,2, or 3
 
 		if (keyTotNum() == 0) {
 			return 0;
-			//failure case
-
 		} else if (keyTotNum() == 1) {
+			for (int i = 1; i < 3; i++) { zoomOrder[i] = 0;} // resets the zoomOrder array to {0,0,0}
 
-			for (int i = 1; i < 3; i++) {
-				zoomOrder[i] = 0;
-			}
-			// resets the zoomOrder array to {0,0,0}
-
-			if (KeyBinds.keyBinding1.isPressed()) {
+			if (key1()) {
 				zoomOrder[0] = 1;
 				return 1;
-			} else if (KeyBinds.keyBinding2.isPressed()) {
+			} else if (key2()) {
 				zoomOrder[0] = 2;
 				return 2;
-			} else if (KeyBinds.keyBinding3.isPressed()) {
+			} else if (key3()) {
 				zoomOrder[0] = 3;
 				return 3;
 			}
 			//After this if-statement the zoomOrder array first value zoomOrder[0] will be set to the first key pressed.
-			// if no second key is pressed it will reset next time a key is pressed.
+			// if no second key gets pressed while still pressed it will reset next time a key is pressed.
 
 		} else if (keyTotNum() == 2) {
 			// if two keys are pressed.
@@ -72,11 +52,9 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 				// This indicates there was 1 key, then a second was pressed.
 
 				zoomOrder[1] = keyNum() / zoomOrder[0];
-				// add to the second order slot, see below for an explaination.
+				// add to the second order slot, this gives us the second key pressed. See keyNum()
 
 				return zoomOrder[0];
-				// still output the first key. When a user lifts the first key it will be processed in keyTotNum() == 1, above.
-
 			} else {
 				//This is the case in which there were 3 keys pressed and someone lifts one of the two keys
 
@@ -86,49 +64,28 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 					//Reorder loop
 
 					if (!found) {
-						found = zoomOrder[i] == 6 / keyNum();
+						found = zoomOrder[i] == 6 / (keyNum());
+						// When all three keys are pressed keyNum is always 6, this gives us the lifted key.
 					}
-					//This found == true when the right key is found.
-					//See key index algorithm to explain why.
-					//Found is outside the for loop to make it save for the next iteration.
-
-
 					if (i == 2) {
-						//If the array is in the last slot
-
 						zoomOrder[i] = 0;
-						//Only two keys are pressed, empty the last slot.
-
 						break;
-						//Break to skip the "found conditions"
-
 					}
-
-
 					if (found) {
 						zoomOrder[i] = zoomOrder[i + 1];
-						//Reorganizes the slots after found.
-
 					}
 				}
 				return zoomOrder[0];
-				//return the new first position.
-
 			}
-		} else {
-			//All three keys are pressed.
-
+		} else { //All three keys are pressed.
 			if (zoomOrder[2] == 0) {
 				//First time pressing the third key.
 
 				zoomOrder[2] = 6 / (zoomOrder[0]*zoomOrder[1]);
 			}
-
 			return zoomOrder[0];
-			//Return the first key pressed.
 		}
 		return 0;
-		//failure return, meathods with values need to return something.
 	}
 
 	public static double ZoomModifier(int keyNum) {
@@ -143,41 +100,28 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 			return CONFIG.Zoom3();
 		}
 		return 0;
-		//failure return, meathods with values need to return something.
 	}
 
 	public static int keyTotNum() {
-		//Tells us how many keybings are pressed to use in zoomModifierNum()
+		//Tells us how many keybindings are pressed to use in zoomModifierNum()
 
 		int num = 0;
 		//cant use 1 here because we don't know which will be pressed!
-		//we throw to a failure in zoomModifierNum() just in case!
+		//we throw to a failure in zoomModifierNum() just in case.
 
-		if (KeyBinds.keyBinding1.isPressed()) { ++num; }
-		if (KeyBinds.keyBinding2.isPressed()) { ++num; }
-		if (KeyBinds.keyBinding3.isPressed()) { ++num; }
+		if (key1()) { ++num; }
+		if (key2()) { ++num; }
+		if (key3()) { ++num; }
 		return num;
 	}
 
 	public static int keyNum() {
-		//This function allows us to assign a number to each key press, and use math to determine which key has
-		//been pressed when more than one has been pressed.
-
-		//So for instance, when 1 and 2 have been pressed the output is 1*2=2. If I know the first key pressed
-		//Which we store in zoomOrder[0], then I can find the second by doing keyNum() / zoomOrder[0]
-
-		//If I know the first two as in zoomOrder[0] and zoomOrder[1], then I can find the third by
-		// keyNum() / ( zoomOrder[0] + zoomOrder[1] )
-
-		//I like this little algorithm, and it should cut down on complex if-statements.
-
 		int num = 1;
 		//We start with one to avoid multiplying by zero, and it is only activates if at least 1 key is pressed.
 
-		if (KeyBinds.keyBinding2.isPressed()) { num = num * 2; }
-		if (KeyBinds.keyBinding3.isPressed()) { num = num * 3; }
+		if (key2()) { num = num * 2; }
+		if (key3()) { num = num * 3; }
 		return num;
-		//Outputs the product of the key values.
 	}
 
 	public static void smooothDuuude(int zoomNum) {
@@ -185,12 +129,8 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 		//Sets and resets the smoothening filter that slows down the mouse.
 
 		if (isZooming() && !MinecraftClient.getInstance().options.smoothCameraEnabled && smoothChecker(zoomNum)) {
-			//If the zooming buttons are pressed, and it's not smooth, AND the smooth option is checked, SMOOOoooothhh it out.
-
 			MinecraftClient.getInstance().options.smoothCameraEnabled = true;
 		} else if ((!isZooming() && MinecraftClient.getInstance().options.smoothCameraEnabled) || !smoothChecker(zoomNum)) {
-			//If the zooming buttons NOT , and it's smooth, OR the smooth option is unchecked, un--SMOOOoooothhh it out.
-
 			MinecraftClient.getInstance().options.smoothCameraEnabled = false;
 		}
 	}
@@ -207,6 +147,18 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 		}
 
 		return false;
-		//Failure state
 	}
+
+	public static boolean key1() {
+		return KeyBinds.keyBinding1.isPressed();
+	}
+
+	public static boolean key2() {
+		return KeyBinds.keyBinding2.isPressed();
+	}
+
+	public static boolean key3() {
+		return KeyBinds.keyBinding3.isPressed();
+	}
+
 }

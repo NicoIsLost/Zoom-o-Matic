@@ -12,7 +12,7 @@ import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 import static com.mojang.brigadier.arguments.BoolArgumentType.bool;
 import static com.nicoislost.ZoomO.CONFIG;
 
-public class ZoomAmountCommand {
+public class Commands {
     public static void register(
             CommandDispatcher<ServerCommandSource> serverCommandSourceCommandDispatcher,
             CommandRegistryAccess commandRegistryAccess,
@@ -90,8 +90,6 @@ public class ZoomAmountCommand {
                                     )
                             )
                     )
-
             );
-
     }
 }
