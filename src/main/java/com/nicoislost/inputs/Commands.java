@@ -23,7 +23,7 @@ public class Commands {
                             .then(CommandManager.literal("Zoom_1")
                                     .then(CommandManager.argument("Percent_Zoom", integer())
                                             .executes(c -> {
-                                                if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=0) {
+                                                if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=1) {
                                                     CONFIG.Zoom1(getInteger(c, "Percent_Zoom"));
                                                     c.getSource().sendMessage(Text.literal("Zoom 1 is now set to " + CONFIG.Zoom1() + "%"));
                                                     return 1;
@@ -35,7 +35,7 @@ public class Commands {
                             .then(CommandManager.literal("Zoom_2")
                                     .then(CommandManager.argument("Percent_Zoom", integer())
                                             .executes(c -> {
-                                                if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=0) {
+                                                if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=1) {
                                                     CONFIG.Zoom2(getInteger(c, "Percent_Zoom"));
                                                     c.getSource().sendMessage(Text.literal("Zoom 2 is now set to " + CONFIG.Zoom2() + "%"));
                                                     return 1;
@@ -47,7 +47,7 @@ public class Commands {
                             .then(CommandManager.literal("Zoom_3")
                                     .then(CommandManager.argument("Percent_Zoom", integer())
                                             .executes(c -> {
-                                                if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=0) {
+                                                if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=1) {
                                                     CONFIG.Zoom3(getInteger(c, "Percent_Zoom"));
                                                     c.getSource().sendMessage(Text.literal("Zoom 3 is now set to " + CONFIG.Zoom3() + "%"));
                                                     return 1;
