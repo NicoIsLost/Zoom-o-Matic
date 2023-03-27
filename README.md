@@ -61,4 +61,4 @@ The goal is to optimize it, make it better, and improve the features in order to
 - Add customizable animations 
 
 # Credit
-Fej1Fun has been hand and in this entire process, coding large portions himself, and helping be when I get stuck with my portions!
+Fej1Fun has been hand and in this entire process, coding large portions himself, and helping me when I get stuck with my portions!
