@@ -8,13 +8,13 @@ import io.wispforest.owo.config.annotation.RangeConstraint;
 @Config(wrapperName = "ZoomOConfig", name = "Zoom-O-Config")
 public class ZoomOConfigModel {
     @RangeConstraint(min = 1, max = 99)
-    public int Zoom1=30;
-    public boolean Zoom1SmoothCamera = false;
+    public int Zoom1=77;
+    public boolean Zoom1SmoothCamera = true;
     @RangeConstraint(min = 1, max = 99)
-    public int Zoom2=40;
+    public int Zoom2=70;
     public boolean Zoom2SmoothCamera = false;
     @RangeConstraint(min = 1, max = 99)
-    public int Zoom3=50;
+    public int Zoom3=60;
     public boolean Zoom3SmoothCamera = false;
 
 }
