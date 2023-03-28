@@ -3,7 +3,8 @@
 	"package": "com.nicoislost.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"ZoomOMixin"
+		"ZoomOMixin",
+		"ZoomOScroll"
 	],
 	"injectors": {
 		"defaultRequire": 1
