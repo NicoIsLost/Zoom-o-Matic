@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="/src/main/resources/assets/zoom-o-matic/Title-Black.png">
-  <source media="(prefers-color-scheme: light)" srcset="/src/main/resources/assets/zoom-o-matic/Title-White.png">
+  <source media="(prefers-color-scheme: dark)" srcset="/src/main/resources/assets/zoom-o-matic/Title-White.png">
+  <source media="(prefers-color-scheme: light)" srcset="/src/main/resources/assets/zoom-o-matic/Title-Black.png">
   <img alt="Zoom-o-MATIC." src="/src/main/resources/assets/zoom-o-matic/Title-White.png">
 </picture>
 
