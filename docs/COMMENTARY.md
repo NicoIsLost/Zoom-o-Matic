@@ -103,7 +103,7 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 
 The first method: `public static final ZoomOConfig CONFIG = ZoomOConfig.createAndLoad();` is loading owo-lib, which we use to save data not-dependent on world (a goal is to remove this dependency).
 
-The second method: `ModRegistries.registerModPackages();` is loading our [ModRegistries](/scr/main/java/com/nicoislost/util/ModRegistries.java) class, which loads registers our keybindings and commands:
+The second method: `ModRegistries.registerModPackages();` is loading our [ModRegistries](/src/main/java/com/nicoislost/util/ModRegistries.java) class, which loads registers our keybindings and commands:
 
 ```java
 package com.nicoislost.util;
@@ -176,7 +176,7 @@ public class ZoomO implements ClientModInitializer {
 
 Again this returns a boolean, true is any of the keybindings are pressed, and false if none are. 
 
-THEN to check if it's actually pressed without the event handler `ClientTickEvents`, we just use an if-statement in the [render-mixin](/scr/main/java/com/nicoislost/mixin/ZoomOMixin.java). 
+THEN to check if it's actually pressed without the event handler `ClientTickEvents`, we just use an if-statement in the [render-mixin](/src/main/java/com/nicoislost/mixin/ZoomOMixin.java). 
 
 ```java
 
