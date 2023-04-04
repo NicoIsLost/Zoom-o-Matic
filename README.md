@@ -68,6 +68,6 @@ The goal is to optimize it, make it better, and improve the features in order to
 - Add customizable animations 
 
 # Credit
-**[Fej1Fun](https://github.com/Fej1Dev)** has been hand and hand in this entire process, coding large portions himself, and helping me when I get stuck with my portions!
+**@Fej1Dev** has been hand and hand in this entire process, coding large portions himself, and helping me when I get stuck with my portions!
 
-**[LogicalGeekBoy](https://www.youtube.com/@LogicalGeekBoy/about)** & [Logical Zoom](https://github.com/LogicalGeekBoy/logical_zoom) - Some of the code used in this mod (mainly the mixin) was from Logical Zoom, but more importantly was that his mod inspired us to make our own. 
+**@LogcialGeekBoy  & [Logical Zoom](https://github.com/LogicalGeekBoy/logical_zoom) - Some of the code used in this mod (mainly the mixin) was from Logical Zoom, but more importantly was that his mod inspired us to make our own. 
