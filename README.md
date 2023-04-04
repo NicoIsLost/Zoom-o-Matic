@@ -1,20 +1,16 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="/src/main/resources/assets/zoom-o-matic/Title-White.png">
-  <source media="(prefers-color-scheme: light)" srcset="/src/main/resources/assets/zoom-o-matic/Title-Black.png">
-  <img alt="Zoom-o-MATIC." src="/src/main/resources/assets/zoom-o-matic/Title-White.png">
-</picture>
+![Title Logo.png](src%2Fmain%2Fresources%2Fassets%2Fzoom-o-matic%2FTitle%20Logo.png)
 
 A simple, but customizable multi-button zoom tool for Minecraft.
 
 It allows for up to 3 keybinds with customizable zoom and on / off smooth camera.
 
-_This mod is for learning most of all,~~ ~~feel free to use it, but its biggest purpose is learning and teaching to mod fabric._
+_This mod is for learning most of all, feel free to use it, but its biggest purpose is learning and teaching to mod fabric._
 # Documentation for Learning Fabric
 While we are certaintly not experts on fabric, we would like to share our journey and in a hope that it can help others get started with learning fabric modding and Java. 
 
 As such, we are currently working (in progress) on a detailed commentary of the code. In the future we may work towards a tutorial either written or video based on feedback.
 
-Find the code commentary here. 
+[Find the code commentary here.](docs/COMMENTARY.md) 
 
 # Usage
 ## To install
