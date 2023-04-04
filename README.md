@@ -1,10 +1,24 @@
-# Zoom-o-Matic
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="/src/main/resources/assets/zoom-o-matic/Title-Black.png">
+  <source media="(prefers-color-scheme: light)" srcset="/src/main/resources/assets/zoom-o-matic/Title-White.png">
+  <img alt="Zoom-o-MATIC." src="/src/main/resources/assets/zoom-o-matic/Title-White.png">
+</picture>
+
 A simple, but customizable multi-button zoom tool for Minecraft.
 
 It allows for up to 3 keybinds with customizable zoom and on / off smooth camera.
 
-_This mod is for learning most of all, feel free to use it, but its biggest purpose is learning and teaching to mod fabric._
+_This mod is for learning most of all,~~ ~~feel free to use it, but its biggest purpose is learning and teaching to mod fabric._
+# Documentation for Learning Fabric
+While we are certaintly not experts on fabric, we would like to share our journey and in a hope that it can help others get started with learning fabric modding and Java. 
 
+As such, we are currently working (in progress) on a detailed commentary of the code. In the future we may work towards a tutorial either written or video based on feedback.
+
+Find the code commentary here. 
+
+# Usage
+## To install
+After fabric mod loader has been installed for the correct version place the latest Zoom-o-matic release with compatible dependencies in the .minecraft/mods folder.
 ## Dependencies
 Fabric Mod Loader (Install to use)
 https://fabricmc.net/use/installer/
@@ -15,10 +29,7 @@ https://github.com/FabricMC/fabric
 owo-lib (Place in mod folder)
 https://github.com/wisp-forest/owo-lib
 
-## To install
-After fabric mod loader has been installed for the correct version place the latest Zoom-o-matic release with compatible dependencies in the .minecraft/mods folder.
-
-## Usage
+## Using the Mod
 **The default Zoom 1 Keybind is "c" which is already bound, so you need to unbind "Save Hotbar Activator" or bind zoom1 to another key to make the mod work.**
 
 ### Mod Menu
@@ -61,4 +72,6 @@ The goal is to optimize it, make it better, and improve the features in order to
 - Add customizable animations 
 
 # Credit
-Fej1Fun has been hand and in this entire process, coding large portions himself, and helping me when I get stuck with my portions!
+**[Fej1Fun](https://github.com/Fej1Dev)** has been hand and hand in this entire process, coding large portions himself, and helping me when I get stuck with my portions!
+
+**[LogicalGeekBoy](https://www.youtube.com/@LogicalGeekBoy/about)** & [Logical Zoom](https://github.com/LogicalGeekBoy/logical_zoom) - Some of the code used in this mod (mainly the mixin) was from Logical Zoom, but more importantly was that his mod inspired us to make our own. 
