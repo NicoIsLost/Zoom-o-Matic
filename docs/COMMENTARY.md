@@ -19,9 +19,9 @@ After that, the best way to start with modding is to use the official fabric tem
 
 While I believe the "split client and common sources" option is best practice, I never got it to work correctly so did not do that option despite this being a client side only mod.
 
-Once you have this template there are a couple of things you should / can do. First is to modify the [fabric.mod.json](../src/main/resources/fabric.mod.json) which is the main configuration for the mod itself.
+Once you have this template there are a couple of things you should / can do. First is to modify the [fabric.mod.json](/src/main/resources/fabric.mod.json) which is the main configuration for the mod itself.
 
-**Note:** There is another configuration, but for the development environment, the [gradle.properties](../gradle.properties) file, but we will cover this later.
+**Note:** There is another configuration, but for the development environment, the [gradle.properties](/gradle.properties) file, but we will cover this later.
 
 **Note:** If you aren't familiar with JSON, it is quite simple and very important, [read about it here](https://www.w3schools.com/whatis/whatis_json.asp). 
 
@@ -103,7 +103,7 @@ public class ZoomO implements ClientModInitializer { //Mod initializer
 
 The first method: `public static final ZoomOConfig CONFIG = ZoomOConfig.createAndLoad();` is loading owo-lib, which we use to save data not-dependent on world (a goal is to remove this dependency).
 
-The second method: `ModRegistries.registerModPackages();` is loading our [ModRegistries](../scr/main/java/com/nicoislost/util/ModRegistries.java) class, which loads registers our keybindings and commands:
+The second method: `ModRegistries.registerModPackages();` is loading our [ModRegistries](/scr/main/java/com/nicoislost/util/ModRegistries.java) class, which loads registers our keybindings and commands:
 
 ```java
 package com.nicoislost.util;
@@ -176,7 +176,7 @@ public class ZoomO implements ClientModInitializer {
 
 Again this returns a boolean, true is any of the keybindings are pressed, and false if none are. 
 
-THEN to check if it's actually pressed without the event handler `ClientTickEvents`, we just use an if-statement in the [render-mixin](../scr/main/java/com/nicoislost/mixin/ZoomOMixin.java). 
+THEN to check if it's actually pressed without the event handler `ClientTickEvents`, we just use an if-statement in the [render-mixin](/scr/main/java/com/nicoislost/mixin/ZoomOMixin.java). 
 
 ```java
 
