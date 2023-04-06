@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 public class ZoomOMixin {
 	@Inject(at = @At("RETURN"), method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",cancellable = true)
-	private void getZoomLevel(CallbackInfoReturnable<Double> callbackInfo) {
+	public void getZoomLevel(CallbackInfoReturnable<Double> callbackInfo) {
 		if (ZoomO.isZooming()){
 			double fov = callbackInfo.getReturnValue();
 			callbackInfo.setReturnValue(fov * (1 - ZoomO.ZoomModifier(ZoomO.zoomModifierNum())/100));
