@@ -7,6 +7,7 @@ import io.wispforest.owo.config.annotation.RangeConstraint;
 @Modmenu(modId="zoom-o-matic")
 @Config(wrapperName = "ZoomOConfig", name = "Zoom-O-Config")
 public class ZoomOConfigModel {
+    public boolean actionBarWriting = true;
     @RangeConstraint(min = 1, max = 99)
     public int Zoom1=77;
     public boolean Zoom1SmoothCamera = true;

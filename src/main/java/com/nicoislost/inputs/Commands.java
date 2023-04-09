@@ -90,6 +90,16 @@ public class Commands {
                                     )
                             )
                     )
+                    .then(CommandManager.literal("ActionBarWriting")
+                            .then(CommandManager.argument("Bool", bool())
+                                    .executes(c -> {
+                                        CONFIG.actionBarWriting(getBool(c, "Bool"));
+                                        c.getSource().sendMessage(Text.literal("Action bar writing is now: " + CONFIG.actionBarWriting()));
+                                        return 1;
+                                    })
+                            )
+
+                    )
             );
     }
 }
