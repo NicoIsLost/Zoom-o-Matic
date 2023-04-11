@@ -2,7 +2,7 @@
 
 A simple, but customizable multi-button zoom tool for Minecraft.
 
-It allows for up to 3 keybinds with customizable zoom and on / off smooth camera.
+It allows for up to 3 keybindings, customizable zooms, scroll-wheel zooming, and on / off smooth camera.
 
 _This mod is for learning most of all, feel free to use it, but its biggest purpose is learning and teaching to mod fabric._
 # Documentation for Learning Fabric
@@ -36,6 +36,9 @@ Are found in the Zoom-o-Matic section of the normal minecraft keybind menu.
 
 Options -> Controls -> Keybinds
 
+### Scroll Zoom
+When zooming you can scroll in or out with your mousewheel to zoom more or less.
+
 ### Zoom Amount
 Adjusts the amount of zooming, with 
 
@@ -44,13 +47,20 @@ Adjusts the amount of zooming, with
 - **X** = Zoom Keybind #, (1, 2, or 3.)
 - **YY** is the % zoom, (1 - 99)
 
-### Smooth Camera
+### Smooth Camera Toggle
 Toggles whether smooth_camera should be active when zooming, which slows down movement.
 
 `/ZoomO SmoothCamera Zoom_X YY`
 
 - **X** = Zoom Keybind #, (1, 2, or 3.)
 - **YY** true/false
+
+### Scroll Zoom Text Toggle
+Toggles whether you have the % zoom displayed in text when using the scroll wheel. 
+
+`/ZoomO ActionBarWriting XX`
+
+- **XX** = true/false
 
 # About This Mod & Plans
 This mod is meant to be a place to learn how to mod fabric mods for minecraft. This our first mod, so we know it's not 100% perfect, but that's not the point.
@@ -59,7 +69,7 @@ The goal is to optimize it, make it better, and improve the features in order to
 
 ## Here is a list of improvements we would like to make, in order of want:
 - Remove owo dependency - i.e. Create a world-independent data saving system.
-- Add scrolling zoom
+- ~~Add scrolling zoom~~ (done)
 - Add a custom, customizable smoother,
 - Add a custom GUI
   - Add more keybinds (including more keybinds, via GUI)

@@ -10,5 +10,6 @@
 	"text.config.Zoom-O-Config.option.Zoom3": "Zoom 3",
 	"text.config.Zoom-O-Config.option.Zoom3SmoothCamera": "Zoom 3 Smooth Camera",
 	"command.exception.between": "The value must be between 1 and 99",
-	"text.config.Zoom-O-Config.option.actionBarWriting": "Write to action bar"
+	"text.config.Zoom-O-Config.option.actionBarWriting": "Write to action bar",
+	"text.config.Zoom-O-Config.title": "Zoom-o-Matic Configuration"
 }
