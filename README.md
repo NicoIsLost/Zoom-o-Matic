@@ -1,5 +1,3 @@
-![Title Logo.png](src%2Fmain%2Fresources%2Fassets%2Fzoom-o-matic%2FTitle%20Logo.png)
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="src/main/resources/assets/zoom-o-matic/Title-White.png">
   <img alt="Zoom-o-Matic" src="src/main/resources/assets/zoom-o-matic/Title-Black.png">
