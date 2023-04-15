@@ -3,6 +3,10 @@
   <img alt="Zoom-o-Matic" src="src/main/resources/assets/zoom-o-matic/Title-Black.png">
 </picture>
 
+![Discord](https://img.shields.io/discord/918887116455432222?label=%20Discord&logo=Discord)
+![Modrinth](https://img.shields.io/modrinth/dt/2GzPMA8i?label=Modrinth&logo=Modrinth)
+![CurseForge](https://cf.way2muchnoise.eu/843440.svg)
+
 A simple, but customizable multi-button zoom tool for Minecraft.
 
 It allows for up to 3 keybindings, customizable zooms, scroll-wheel zooming, and on / off smooth camera.
