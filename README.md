@@ -3,7 +3,7 @@
   <img alt="Zoom-o-Matic" src="src/main/resources/assets/zoom-o-matic/Title-Black.png">
 </picture>
 
-[![Discord](https://img.shields.io/discord/918887116455432222?label=%20Discord&logo=Discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/g9wJSmtnF4 )
+[![Discord](https://img.shields.io/discord/918887116455432222?label=%20Discord&logo=Discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/g9wJSmtnF4)
 [![Modrinth](https://img.shields.io/modrinth/dt/2GzPMA8i?label=Modrinth&logo=Modrinth)](https://modrinth.com/mod/zoom-o-matic)
 [![CurseForge](https://cf.way2muchnoise.eu/843440.svg)](https://www.curseforge.com/minecraft/mc-mods/zoom-o-matic)
 
