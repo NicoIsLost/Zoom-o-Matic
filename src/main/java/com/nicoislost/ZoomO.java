@@ -70,9 +70,13 @@ public class ZoomO implements ClientModInitializer { // Mod initializer
 			if (zoomOrder[2] == 0) {
 				// This indicates there was 1 key, then a second was pressed.
 
-				zoomOrder[1] = keyNum() / zoomOrder[0]; //TODO potential divide by 0 error
-				// add to the second order slot, this gives us the second key pressed. See
-				// keyNum()
+				try {
+					zoomOrder[1] = keyNum() / zoomOrder[0]; //TODO find a better way to avoid dividing by zero.
+					// add to the second order slot, this gives us the second key pressed. See
+					// keyNum()
+				} catch (Exception e) {
+					zoomOrder[1] = 0;
+				}
 
 				return zoomOrder[0];
 			} else {
@@ -102,8 +106,11 @@ public class ZoomO implements ClientModInitializer { // Mod initializer
 		} else { // All three keys are pressed.
 			if (zoomOrder[2] == 0) {
 				// First time pressing the third key.
-
-				zoomOrder[2] = 6 / (zoomOrder[0] * zoomOrder[1]); //TODO potential divide by 0 crash
+				try {
+					zoomOrder[2] = 6 / (zoomOrder[0] * zoomOrder[1]); //TODO find a better way to avoid dividing by zero.
+				} catch (Exception e) {
+					zoomOrder[2] = 0;
+				}
 			}
 			return zoomOrder[0];
 		}
