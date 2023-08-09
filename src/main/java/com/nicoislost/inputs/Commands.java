@@ -24,8 +24,8 @@ public class Commands {
                                     .then(CommandManager.argument("Percent_Zoom", integer())
                                             .executes(c -> {
                                                 if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=1) {
-                                                    CONFIG.Zoom1(getInteger(c, "Percent_Zoom"));
-                                                    c.getSource().sendMessage(Text.literal("Zoom 1 is now set to " + CONFIG.Zoom1() + "%"));
+                                                    CONFIG.zoom1(getInteger(c, "Percent_Zoom"));
+                                                    c.getSource().sendMessage(Text.literal("Zoom 1 is now set to " + CONFIG.zoom1() + "%"));
                                                     return 1;
                                                 }
                                                 throw new SimpleCommandExceptionType(Text.translatable("command.exception.between")).create();
@@ -36,8 +36,8 @@ public class Commands {
                                     .then(CommandManager.argument("Percent_Zoom", integer())
                                             .executes(c -> {
                                                 if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=1) {
-                                                    CONFIG.Zoom2(getInteger(c, "Percent_Zoom"));
-                                                    c.getSource().sendMessage(Text.literal("Zoom 2 is now set to " + CONFIG.Zoom2() + "%"));
+                                                    CONFIG.zoom2(getInteger(c, "Percent_Zoom"));
+                                                    c.getSource().sendMessage(Text.literal("Zoom 2 is now set to " + CONFIG.zoom2() + "%"));
                                                     return 1;
                                                 }
                                                 throw new SimpleCommandExceptionType(Text.translatable("command.exception.between")).create();
@@ -48,8 +48,8 @@ public class Commands {
                                     .then(CommandManager.argument("Percent_Zoom", integer())
                                             .executes(c -> {
                                                 if(getInteger(c, "Percent_Zoom")<=99 && getInteger(c, "Percent_Zoom")>=1) {
-                                                    CONFIG.Zoom3(getInteger(c, "Percent_Zoom"));
-                                                    c.getSource().sendMessage(Text.literal("Zoom 3 is now set to " + CONFIG.Zoom3() + "%"));
+                                                    CONFIG.zoom3(getInteger(c, "Percent_Zoom"));
+                                                    c.getSource().sendMessage(Text.literal("Zoom 3 is now set to " + CONFIG.zoom3() + "%"));
                                                     return 1;
                                                 }
                                                 throw new SimpleCommandExceptionType(Text.translatable("command.exception.between")).create();
@@ -61,8 +61,8 @@ public class Commands {
                             .then(CommandManager.literal("Zoom_1")
                                     .then(CommandManager.argument("Bool", bool())
                                             .executes(c -> {
-                                                CONFIG.Zoom1SmoothCamera(getBool(c, "Bool"));
-                                                c.getSource().sendMessage(Text.literal("Zoom 1 smooth camera is now: " + CONFIG.Zoom1SmoothCamera()));
+                                                CONFIG.zoom1SmoothCamera(getBool(c, "Bool"));
+                                                c.getSource().sendMessage(Text.literal("Zoom 1 smooth camera is now: " + CONFIG.zoom1SmoothCamera()));
                                                 return 1;
                                             })
                                     )
@@ -72,8 +72,8 @@ public class Commands {
                             .then(CommandManager.literal("Zoom_2")
                                     .then(CommandManager.argument("Bool", bool())
                                             .executes(c -> {
-                                                CONFIG.Zoom2SmoothCamera(getBool(c, "Bool"));
-                                                c.getSource().sendMessage(Text.literal("Zoom 2 smooth camera is now: " + CONFIG.Zoom2SmoothCamera()));
+                                                CONFIG.zoom2SmoothCamera(getBool(c, "Bool"));
+                                                c.getSource().sendMessage(Text.literal("Zoom 2 smooth camera is now: " + CONFIG.zoom2SmoothCamera()));
                                                 return 1;
                                             })
                                     )
@@ -83,8 +83,8 @@ public class Commands {
                             .then(CommandManager.literal("Zoom_3")
                                     .then(CommandManager.argument("Bool", bool())
                                             .executes(c -> {
-                                                CONFIG.Zoom3SmoothCamera(getBool(c, "Bool"));
-                                                c.getSource().sendMessage(Text.literal("Zoom 3 smooth camera is now: " + CONFIG.Zoom3SmoothCamera()));
+                                                CONFIG.zoom3SmoothCamera(getBool(c, "Bool"));
+                                                c.getSource().sendMessage(Text.literal("Zoom 3 smooth camera is now: " + CONFIG.zoom3SmoothCamera()));
                                                 return 1;
                                             })
                                     )

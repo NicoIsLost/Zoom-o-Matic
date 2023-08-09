@@ -9,13 +9,13 @@ import io.wispforest.owo.config.annotation.RangeConstraint;
 public class ZoomOConfigModel {
     public boolean actionBarWriting = true;
     @RangeConstraint(min = 1, max = 99)
-    public int Zoom1=77;
-    public boolean Zoom1SmoothCamera = true;
+    public int zoom1=77;
+    public boolean zoom1SmoothCamera = true;
     @RangeConstraint(min = 1, max = 99)
-    public int Zoom2=70;
-    public boolean Zoom2SmoothCamera = false;
+    public int zoom2=70;
+    public boolean zoom2SmoothCamera = false;
     @RangeConstraint(min = 1, max = 99)
-    public int Zoom3=60;
-    public boolean Zoom3SmoothCamera = false;
+    public int zoom3=60;
+    public boolean zoom3SmoothCamera = false;
 
 }

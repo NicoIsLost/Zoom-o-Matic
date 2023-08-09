@@ -1,4 +1,14 @@
 {
+	"schemaVersion": 1,
+	"id": "zoom-o-matic",
+	"version": "${version}",
+	"name": "Zoom-o-Matic",
+	"description": "A simple, but customizable multi-button zoom tool for Minecraft.",
+	"contact": {
+		"sources": "https://github.com/NicoIsLost/Zoom-o-Matic",
+		"issues": "https://github.com/NicoIsLost/Zoom-o-Matic/issues",
+		"discord": "https://discord.gg/66rV5hanFP"
+	},
 	"custom": {
 		"modmenu": {
 			"links": {
@@ -10,16 +20,6 @@
 			},
 			"update_checker": false
 		}
-	},
-	"schemaVersion": 1,
-	"id": "zoom-o-matic",
-	"version": "${version}",
-	"name": "Zoom-o-Matic",
-	"description": "A simple, but customizable multi-button zoom tool for Minecraft.",
-	"contact": {
-		"sources": "https://github.com/NicoIsLost/Zoom-o-Matic",
-		"issues": "https://github.com/NicoIsLost/Zoom-o-Matic/issues",
-		"discord": "https://discord.gg/66rV5hanFP"
 	},
 	"authors": [
 		{
