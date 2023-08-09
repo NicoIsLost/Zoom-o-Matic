@@ -33,32 +33,32 @@ public class ZoomOScroll {
 
         if(ZoomO.isZooming() && MinecraftClient.getInstance().player != null){
             double beforehorizontal = horizontal;
-            if (beforehorizontal<vertical && ZoomO.key1() && MinecraftClient.getInstance().player != null){
+            if (beforehorizontal<vertical && ZoomO.isLevelOnePressed() && MinecraftClient.getInstance().player != null){
                 ZoomO.CONFIG.Zoom1(ZoomO.CONFIG.Zoom1()+1);
                 beforehorizontal = horizontal;
                actionSend(1);
             }
-            else if (beforehorizontal<vertical && ZoomO.key2() && MinecraftClient.getInstance().player != null){
+            else if (beforehorizontal<vertical && ZoomO.isLevelTwoPressed() && MinecraftClient.getInstance().player != null){
                 ZoomO.CONFIG.Zoom2(ZoomO.CONFIG.Zoom2()+1);
                 beforehorizontal = horizontal;
                 actionSend(2);
             }
-            else if (beforehorizontal<vertical && ZoomO.key3() && MinecraftClient.getInstance().player != null){
+            else if (beforehorizontal<vertical && ZoomO.isLevelThreePressed() && MinecraftClient.getInstance().player != null){
                 ZoomO.CONFIG.Zoom3(ZoomO.CONFIG.Zoom3()+1);
                 beforehorizontal = horizontal;
                 actionSend(3);
             }
-            else if (beforehorizontal>vertical && ZoomO.key1() && MinecraftClient.getInstance().player != null){
+            else if (beforehorizontal>vertical && ZoomO.isLevelOnePressed() && MinecraftClient.getInstance().player != null){
                 ZoomO.CONFIG.Zoom1(ZoomO.CONFIG.Zoom1()-1);
                 beforehorizontal = horizontal;
                 actionSend(1);
             }
-            else if (beforehorizontal>vertical && ZoomO.key2() && MinecraftClient.getInstance().player != null){
+            else if (beforehorizontal>vertical && ZoomO.isLevelTwoPressed() && MinecraftClient.getInstance().player != null){
                 ZoomO.CONFIG.Zoom2(ZoomO.CONFIG.Zoom2()-1);
                 beforehorizontal = horizontal;
                 actionSend(2);
             }
-            else if (beforehorizontal>vertical && ZoomO.key3() && MinecraftClient.getInstance().player != null){
+            else if (beforehorizontal>vertical && ZoomO.isLevelThreePressed() && MinecraftClient.getInstance().player != null){
                 ZoomO.CONFIG.Zoom3(ZoomO.CONFIG.Zoom3()-1);
                 beforehorizontal = horizontal;
                 actionSend(3);
