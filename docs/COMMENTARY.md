@@ -31,7 +31,7 @@ The top part of **fabric.mod.json** is tagging and contact info etc.. The later 
 "environment": "client",
 	"entrypoints": {
 		"client": [
-			"com.nicoislost.ZoomO"
+			"com.nicoislost.ZoomOMatic"
 		]
 	},
 	"mixins": [
@@ -108,7 +108,7 @@ The second method: `ModRegistries.registerModPackages();` is loading our [ModReg
 ```java
 package com.nicoislost.util;
 
-import com.nicoislost.inputs.Commands;
+import com.nicoislost.command.Commands;
 import com.nicoislost.inputs.KeyBinds;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 

@@ -1,6 +1,6 @@
 package com.nicoislost.mixin;
 
-import com.nicoislost.ZoomO;
+import com.nicoislost.ZoomOMatic;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -8,16 +8,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(GameRenderer.class)
+public class GameRendererMixin {
 
-public class ZoomOMixin {
+	/**
+	 * Changes the FOV when zooming
+	 * @param callbackInfo the callback info
+	 */
 	@Inject(at = @At("RETURN"), method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",cancellable = true)
-	public void getZoomLevel(CallbackInfoReturnable<Double> callbackInfo) {
-		if (ZoomO.isZooming()){
-			double fov = callbackInfo.getReturnValue();
-			callbackInfo.setReturnValue(fov * (1 - ZoomO.ZoomModifier(ZoomO.zoomModifierNum())/100));
+	public void zoom$getFov(CallbackInfoReturnable<Double> callbackInfo) {
+		if (ZoomOMatic.isZooming()){
+			double fov = callbackInfo.getReturnValue() * (1 - (double) ZoomOMatic.getActiveZoom().configGet() / 100);
+			callbackInfo.setReturnValue(fov);
 		}
-
-		ZoomO.smooothDuuude(ZoomO.zoomModifierNum());
-		//Sets smoothness based on the settings in owo
 	}
 }

@@ -3,9 +3,9 @@
 	"package": "com.nicoislost.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"ZoomOMixin",
-		"ZoomOScroll",
-		"ZoomOInventoryScroll"
+		"GameRendererMixin",
+		"MouseMixin",
+      "PlayerInventoryMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
