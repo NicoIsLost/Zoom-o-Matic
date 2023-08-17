@@ -1,11 +1,16 @@
 package com.nicoislost;
 
-import com.nicoislost.inputs.KeyBinds;
+import com.nicoislost.inputs.KeyBind;
 import com.nicoislost.owo.ZoomOConfig;
 import com.nicoislost.util.ModRegistries;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.*;
 
 /**
  * The main class for the mod that initializes and handles a majority of the
@@ -13,11 +18,23 @@ import net.minecraft.client.MinecraftClient;
  */
 public class ZoomO implements ClientModInitializer { // Mod initializer
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ZoomO.class);
+
 	// We used owo from wispforest to store the mod settings
 	// this is the call to the configuration
 	// https://docs.wispforest.io/owo/setup/
 	public static final ZoomOConfig CONFIG = ZoomOConfig.createAndLoad();
-	private static final int[] zoomOrder = { 0, 0, 0 };
+	// I've spent WAY to long steering at this trying to figure out what it's trying to do.  That's not say it's not
+	// a good idea, only that I'm dumb :P.  From what I understand, this seems to be keeping track of the order the
+	// keys are pressed ... my immediate thought is, why not use a "+"/"-" workflow (ie step in/step out), and simply
+	// keep track of the current zoom level, but I'm guessing it has to do with having the ability to choose
+	// the zoom level, for more "dramatic" effects ;)
+	//
+	//private static final int[] zoomOrder = { 0, 0, 0 };
+
+	// Maintains a FILO style list of the keys been pressed, where the first element is the most recent key pressed
+	// and the last is the first key pressed
+	private static final List<KeyBind> ACTIVE_KEYS = new ArrayList<>(3);
 
 	@Override
 	public void onInitializeClient() {
@@ -28,197 +45,154 @@ public class ZoomO implements ClientModInitializer { // Mod initializer
 	 * @return If any keys are being pressed
 	 */
 	public static boolean isZooming() {
-		return key1() || key2() || key3();
+//		You could also do something like...
+//		for (KeyBind binding : KeyBind.values()) {
+//			if (binding.isPressed()) {
+//				return true;
+//			}
+//		}
+//		return false;
+//		And if you were to add more key bindings, you get automatic support
+		return isLevelOnePressed() || isLevelTwoPressed() || isLevelThreePressed();
 	}
 
 	/**
-	 * Determine which zoom setting should be used. This is the function that is
-	 * called by the
-	 * {@link com.nicoislost.mixin.ZoomOMixin#getZoomLevel(org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable)
-	 * getZoomLevel} method from the Mixin.
-	 * 
-	 * @return 1, 2, 3, or 0 if no valid keys are pressed.
+	 * Synchronises the key states
 	 */
-	public static int zoomModifierNum() {
+	private static void syncKeys() {
+		// So, in theory, as a new is pressed, it will be added to the start of the `List` and as a key is released
+		// it will be removed, independent of where it resides in the `List`.
+		// This should then maintain the order in which the keys have been pressed and the first element is the latest
+		// key and the last element will be the earliest key pressed, so kind of a FILO list (except we can
+		// technically pop keys from any location)...but should otherwise maintain the "press" order
+		// I would prefer to use a `Set`, but that doesn't guarantee insertion order
+		for (KeyBind bind : KeyBind.values()) {
+			if (bind.isPressed() && !ACTIVE_KEYS.contains(bind)) {
+				// Add the new key to the start of the list
+				ACTIVE_KEYS.add(0, bind);
+			} else if (!bind.isPressed()) {
+				ACTIVE_KEYS.remove(bind);
+			}
+		}
+	}
 
-		if (keysPressed() == 0) {
+	/**
+	 * @return Returns the currently active key binding or null if none are active
+	 */
+	private static KeyBind getCurrentKeyBind() {
+		if (!isZooming() || ACTIVE_KEYS.isEmpty()) {
+			return null;
+		}
+		return ACTIVE_KEYS.get(0);
+	}
+
+	/**
+	 * Returns the configured zoom modifier for the currently active key binding
+	 * @return The configure zoom modifier value for the active key binding or 0 if no key binding is active
+	 */
+	private static double getCurrentZoomModifier() {
+		KeyBind keyBind = getCurrentKeyBind();
+		if (keyBind == null) {
 			return 0;
-		} else if (keysPressed() == 1) {
-			// reset the zoomOrder array to {0,0,0}
-			for (int i = 1; i < 3; i++) {
-				zoomOrder[i] = 0;
-			}
-
-			if (key1()) {
-				zoomOrder[0] = 1;
-				return 1;
-			} else if (key2()) {
-				zoomOrder[0] = 2;
-				return 2;
-			} else if (key3()) {
-				zoomOrder[0] = 3;
-				return 3;
-			}
-			// After this if-statement the zoomOrder array first value zoomOrder[0] will be
-			// set to the first key pressed.
-			// if no second key gets pressed while still pressed it will reset next time a
-			// key is pressed.
-
-		} else if (keysPressed() == 2) {
-			// if two keys are pressed.
-
-			if (zoomOrder[2] == 0) {
-				// This indicates there was 1 key, then a second was pressed.
-
-				try {
-					zoomOrder[1] = keyNum() / zoomOrder[0]; //TODO find a better way to avoid dividing by zero.
-					// add to the second order slot, this gives us the second key pressed. See
-					// keyNum()
-				} catch (Exception e) {
-					zoomOrder[1] = 0;
-				}
-
-				return zoomOrder[0];
-			} else {
-				// This is the case in which there were 3 keys pressed and someone lifts one of
-				// the two keys
-
-				boolean found = false;
-
-				for (int i = 0; i < 3; i++) {
-					// Reorder loop
-
-					if (!found) {
-						found = zoomOrder[i] == 6 / (keyNum());
-						// When all three keys are pressed keyNum is always 6, this gives us the lifted
-						// key.
-					}
-					if (i == 2) {
-						zoomOrder[i] = 0;
-						break;
-					}
-					if (found) {
-						zoomOrder[i] = zoomOrder[i + 1];
-					}
-				}
-				return zoomOrder[0];
-			}
-		} else { // All three keys are pressed.
-			if (zoomOrder[2] == 0) {
-				// First time pressing the third key.
-				try {
-					zoomOrder[2] = 6 / (zoomOrder[0] * zoomOrder[1]); //TODO find a better way to avoid dividing by zero.
-				} catch (Exception e) {
-					zoomOrder[2] = 0;
-				}
-			}
-			return zoomOrder[0];
 		}
-		return 0;
+		LOGGER.info("Current key = " + keyBind);
+		return keyBind.getConfigValue();
 	}
 
 	/**
-	 * Translates the number output from {@link #zoomModifierNum()} to a double with
-	 * the zoom amount defined in the config.
-	 * 
-	 * @param keyNum - 1, 2, or 3
-	 * @return A double that can be interpreted as a FOV value in the source based
-	 *         on corresponding values in the config. Returns 0 if keyNum is
-	 *         invalid.
+	 * Delegates the functionality of the MixIn callback
+	 * @param callbackInfo
 	 */
-	public static double ZoomModifier(int keyNum) {
-		if (keyNum == 1) {
-			return CONFIG.Zoom1();
-		} else if (keyNum == 2) {
-			return CONFIG.Zoom2();
-		} else if (keyNum == 3) {
-			return CONFIG.Zoom3();
+	// One thing to remember is, this is going to be called ALOT while one of the key bindings is being pressed,
+	// so we should be conscious of doing as little work as fast as possible - so, caching values if possible and/or
+	// reducing the amount of computational work we're doing.
+	// One thing we could do is check the previous state with the current state and if nothing's changed, returned
+	// the previously calculated value, but, arguably, comparing two `List` isn't the fastest thing in the world either,
+	// so maybe a `BitSet` instead?
+	public static void getZoomLevel(CallbackInfoReturnable<Double> callbackInfo) {
+		syncKeys();
+		if (isZooming()) {
+			double fov = callbackInfo.getReturnValue();
+			callbackInfo.setReturnValue(fov * ZoomO.getZoomFactor());
 		}
-		return 0;
+		ZoomO.smooothDuuude();
 	}
 
 	/**
-	 * Tells us how many keybindings are pressed to use in
-	 * {@link #zoomModifierNum()}
-	 * 
-	 * @return 0-3 depending on how many keys are pressed.
+	 * Calculates the zoom factor to be applied based on the current active key binding and it's configured zoom
+	 * state
+	 * @return The zoom factor for the key binding or `1` if no zooming is occurring
 	 */
-	public static int keysPressed() {
-		//This converts our booleans into ints and sums them up.
-		return (key1() ? 1 : 0) + (key2() ? 1 : 0) + (key3() ? 1 : 0);
+	public static double getZoomFactor() {
+		// Insert some paranoia
+		if (!isZooming()) {
+			LOGGER.info("You're not zooming, what are you doing here?!");
+			return 1;
+		}
+		double modifier = getCurrentZoomModifier();
+		LOGGER.info("modifier = " + modifier);
+		return 1 - (modifier / 100);
 	}
 
-	/**
-	 * @return 1 if 0 or 1 keys are pressed, 2 if 2 keys are pressed, 6 if 3 keys
-	 *         are pressed.
-	 */
-	public static int keyNum() {
-		int num = 1;
-		// We start with one to avoid multiplying by zero, and it is only activates if
-		// at least 1 key is pressed.
-
-		if (key2()) {
-			num = num * 2;
+	private static boolean isSmoothCameraForCurrentKeyEnabled() {
+		KeyBind keyBind = getCurrentKeyBind();
+		if (keyBind == null) {
+			return false;
 		}
-		if (key3()) {
-			num = num * 3;
-		}
-		return num;
+		return keyBind.isSmoothCameraEnabled();
+//		boolean enabled = false;
+//		switch (keyBind) {
+//			case LEVEL_1 -> enabled = CONFIG.zoom1SmoothCamera();
+//			case LEVEL_2 -> enabled = CONFIG.zoom2SmoothCamera();
+//			case LEVEL_3 -> enabled = CONFIG.zoom3SmoothCamera();
+//		}
+//		return enabled;
 	}
 
 	/**
 	 * Sooooooo smoooooth duuuuuuude Sets and resets the smoothening filter that
 	 * slows down the mouse.
-	 * 
-	 * @param zoomNum - Zoom setting 1, 2, or 3
 	 */
-	public static void smooothDuuude(int zoomNum) {
-		if (isZooming() && !MinecraftClient.getInstance().options.smoothCameraEnabled && smoothChecker(zoomNum)) {
+	public static void smooothDuuude() {
+		//int zoomNum = zoomModifierNum();
+		if (isZooming() && !MinecraftClient.getInstance().options.smoothCameraEnabled && isSmoothCameraForCurrentKeyEnabled()) {
 			MinecraftClient.getInstance().options.smoothCameraEnabled = true;
 		} else if ((!isZooming() && MinecraftClient.getInstance().options.smoothCameraEnabled)
-				|| !smoothChecker(zoomNum)) {
+				|| !isSmoothCameraForCurrentKeyEnabled()) {
 			MinecraftClient.getInstance().options.smoothCameraEnabled = false;
 		}
 	}
 
-	/**
-	 * Fetch the boolean from the registry, to use with smooothDuuude()
-	 * 
-	 * @param zoomNum
-	 * @return
+	/*
+	I spent some time steering at this trying to figure out what it was trying to say.  As a "general" recommendation,
+	a little more verbose description is going to make it easier for other people to read the code and won't
+	require them to jump down to the method definition to actually workout what's going.
+
+	Java Coding Conventions would also recommend using the prefix of `is` for boolean properties/results, but I'd
+	also argue that `are` is also acceptable if the grammar matches
 	 */
-	public static boolean smoothChecker(int zoomNum) {
-
-		if (zoomNum == 1) {
-			return CONFIG.Zoom1SmoothCamera();
-		} else if (zoomNum == 2) {
-			return CONFIG.Zoom2SmoothCamera();
-		} else if (zoomNum == 3) {
-			return CONFIG.Zoom3SmoothCamera();
-		}
-
-		return false;
-	}
 
 	/**
 	 * @return If key 1 is being pressed
 	 */
-	public static boolean key1() {
-		return KeyBinds.keyBinding1.isPressed();
+	public static boolean isLevelOnePressed() {
+		// Example of convince method
+		return KeyBind.LEVEL_1.isPressed();
 	}
 
 	/**
 	 * @return If key 2 is being pressed
 	 */
-	public static boolean key2() {
-		return KeyBinds.keyBinding2.isPressed();
+	public static boolean isLevelTwoPressed() {
+		// Example showing how to reach "more" details of the binding if you need it
+		return KeyBind.LEVEL_2.getBinding().isPressed();
 	}
 
 	/**
 	 * @return If key 3 is being pressed
 	 */
-	public static boolean key3() {
-		return KeyBinds.keyBinding3.isPressed();
+	public static boolean isLevelThreePressed() {
+		return KeyBind.LEVEL_3.getBinding().isPressed();
 	}
 
 }

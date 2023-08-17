@@ -1,12 +1,12 @@
 package com.nicoislost.util;
 
 import com.nicoislost.inputs.Commands;
-import com.nicoislost.inputs.KeyBinds;
+import com.nicoislost.inputs.KeyBind;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 public class ModRegistries {
     public static void registerModPackages() {
-        KeyBinds.RegisterKeyBinds();
+        KeyBind.registerBindings();
         registerCommands();
     }
     private static void registerCommands() {
