@@ -1,14 +1,18 @@
 package com.nicoislost.command;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
+import com.mojang.serialization.RecordBuilder;
 import com.nicoislost.Zooms;
+import net.minecraft.util.Pair;
+import org.jetbrains.annotations.Contract;
 
-import java.util.HashMap;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -16,14 +20,12 @@ import java.util.concurrent.CompletableFuture;
  **/
 public class ZoomArgumentType implements ArgumentType<Zooms> {
 
-    HashMap<String, Zooms> zooms = new HashMap<>();
+    private final ImmutableMap<String, Zooms> zooms =
+            Arrays.stream(Zooms.values()).collect(ImmutableMap.toImmutableMap(
+                    zoom -> zoom.getName().toLowerCase().replaceAll("\\W", "_"),
+                    zoom -> zoom
+            ));
 
-    private ZoomArgumentType() {
-        for (Zooms zoom : Zooms.values()) {
-            if (zoom == Zooms.NONE) continue;
-            zooms.put(zoom.getName().toLowerCase().replaceAll("\\W", "_"), zoom);
-        }
-    }
 
     public static ZoomArgumentType zoom() {
         return new ZoomArgumentType();

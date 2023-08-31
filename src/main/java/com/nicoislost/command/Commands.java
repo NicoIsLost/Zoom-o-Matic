@@ -27,7 +27,7 @@ public class Commands {
 
                                                 int zoomPercentage = IntegerArgumentType.getInteger(c, "zoom_percentage");
 
-                                                zoom.configSet(zoomPercentage);
+                                                zoom.setZoom(zoomPercentage);
                                                 c.getSource().getPlayer().sendMessage(Text.literal(String.format("%s is now: %d%%", zoom.name(), zoomPercentage)).formatted(Formatting.GRAY, Formatting.ITALIC));
 
                                                 return 1;
@@ -44,7 +44,7 @@ public class Commands {
 
                                                 boolean bool = BoolArgumentType.getBool(c, "bool");
 
-                                                zoom.configSetSmooth(bool);
+                                                zoom.setSmooth(bool);
                                                 c.getSource().getPlayer().sendMessage(Text.literal(String.format("Smooth %s is now: %s", zoom.name(), bool)).formatted(Formatting.GRAY, Formatting.ITALIC));
 
                                                 return 1;

@@ -1,7 +1,10 @@
 package com.nicoislost;
 
-import com.nicoislost.inputs.KeyBinds;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
+import org.jetbrains.annotations.Contract;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -17,32 +20,21 @@ public enum Zooms {
             ZoomOMatic.CONFIG::zoom1,
             ZoomOMatic.CONFIG::zoom1SmoothCamera,
             ZoomOMatic.CONFIG::zoom1SmoothCamera,
-            KeyBinds.KEY_BINDING_1
+            GLFW.GLFW_KEY_C
     ),
     ZOOM_2(
             "Zoom 2",
             ZoomOMatic.CONFIG::zoom2,
             ZoomOMatic.CONFIG::zoom2,
             ZoomOMatic.CONFIG::zoom2SmoothCamera,
-            ZoomOMatic.CONFIG::zoom2SmoothCamera,
-            KeyBinds.KEY_BINDING_2
+            ZoomOMatic.CONFIG::zoom2SmoothCamera
     ),
     ZOOM_3(
             "Zoom 3",
             ZoomOMatic.CONFIG::zoom3,
             ZoomOMatic.CONFIG::zoom3,
             ZoomOMatic.CONFIG::zoom3SmoothCamera,
-            ZoomOMatic.CONFIG::zoom3SmoothCamera,
-            KeyBinds.KEY_BINDING_3
-    ),
-
-    NONE(
-            "None",
-            v -> {},
-            () -> 0,
-            v -> {},
-            () -> false,
-            null
+            ZoomOMatic.CONFIG::zoom3SmoothCamera
     );
 
     private final String name;
@@ -52,41 +44,54 @@ public enum Zooms {
     private final Supplier<Boolean> smoothGetter;
     private final KeyBinding keyBinding;
 
-    Zooms(String name, Consumer<Integer> setter, Supplier<Integer> getter, Consumer<Boolean> smoothSetter, Supplier<Boolean> smoothGetter, KeyBinding keyBinding) {
+    Zooms(String name, Consumer<Integer> setter, Supplier<Integer> getter, Consumer<Boolean> smoothSetter, Supplier<Boolean> smoothGetter, int key) {
         this.name = name;
         this.setter = setter;
         this.getter = getter;
         this.smoothSetter = smoothSetter;
         this.smoothGetter = smoothGetter;
-        this.keyBinding = keyBinding;
+        this.keyBinding = makeKeybind(name.toLowerCase().replaceAll("\\W", "_" ), key);
+    }
+
+    Zooms(String name, Consumer<Integer> setter, Supplier<Integer> getter, Consumer<Boolean> smoothSetter, Supplier<Boolean> smoothGetter) {
+        this(name, setter, getter, smoothSetter, smoothGetter, GLFW.GLFW_KEY_UNKNOWN);
+    }
+
+    
+    private static KeyBinding makeKeybind(String name, int key) {
+        return new KeyBinding("key.zoom-o-matic." + name, InputUtil.Type.KEYSYM, key, "category.zoom-o-matic.zoom");
+    }
+
+    /**
+     * Registers the keybinding for the zoom
+     */
+    public void registerKeyBinding() {
+        KeyBindingHelper.registerKeyBinding(keyBinding);
+    }
+
+    public boolean isActive() {
+        return keyBinding.isPressed();
     }
 
     public String getName() {
         return name;
     }
 
-    public void configSet(int value) {
-        setter.accept(value);
+    public void setZoom(int zoom) {
+        setter.accept(zoom);
     }
 
-    public int configGet() {
+    public int getZoom() {
         return getter.get();
     }
 
-    public void configSetSmooth(boolean bool) {
-        smoothSetter.accept(bool);
+    public void setSmooth(boolean smooth) {
+        smoothSetter.accept(smooth);
     }
 
-    public boolean configGetSmooth() {
+    public boolean getSmooth() {
         return smoothGetter.get();
     }
 
-    public static Zooms fromKeyBinding(KeyBinding keyBinding) {
-        for (Zooms zoom : Zooms.values()) {
-            if (zoom.keyBinding == keyBinding) {
-                return zoom;
-            }
-        }
-        return NONE;
-    }
+
 }

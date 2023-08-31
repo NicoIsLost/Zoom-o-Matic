@@ -2,6 +2,7 @@ package com.nicoislost.mixin;
 
 import com.nicoislost.ZoomOMatic;
 import net.minecraft.entity.player.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +17,7 @@ public class PlayerInventoryMixin {
      * @param ci the callback info
      */
     @Inject(at = @At("HEAD"), method = "scrollInHotbar", cancellable = true)
-    private void zoom$scrollInHotbar(double scrollAmount, CallbackInfo ci) {
+    private void zoom$scrollInHotbar(double scrollAmount, @NotNull CallbackInfo ci) {
         if (ZoomOMatic.isZooming()) {
             ci.cancel();
         }

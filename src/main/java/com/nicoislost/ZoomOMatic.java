@@ -1,12 +1,12 @@
 package com.nicoislost;
 
 import com.nicoislost.command.Commands;
-import com.nicoislost.inputs.KeyBinds;
 import com.nicoislost.owo.ZoomConfig;
-
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,9 @@ public class ZoomOMatic implements ClientModInitializer { // Mod initializer
 	@Override
 	public void onInitializeClient() {
 
-		KeyBinds.registerKeyBinds();
+		for (Zooms zoom : Zooms.values()) {
+			zoom.registerKeyBinding();
+		}
 
 		ClientCommandRegistrationCallback.EVENT.register(
 				(dispatcher, dedicated) -> Commands.register(dispatcher)
@@ -43,33 +45,27 @@ public class ZoomOMatic implements ClientModInitializer { // Mod initializer
 	 * @return If any keys are being pressed
 	 */
 	public static boolean isZooming() {
-		return getActiveZoom() != Zooms.NONE;
+		return getActiveZoom() != null;
 	}
 
 	/**
 	 * @return The active zoom setting
 	 */
+	@Nullable
 	public static Zooms getActiveZoom() {
 		if (zoomStack.isEmpty()) {
-			return Zooms.NONE;
+			return null;
 		}
-
 		return zoomStack.get(zoomStack.size() - 1);
 	}
 
 	public static void updateZoomStack() {
-		KeyBinds.getKeybindings().forEach(k -> {
-
-			Zooms zoom = Zooms.fromKeyBinding(k);
-
-			if (zoom != Zooms.NONE) {
-				if (k.isPressed() && !zoomStack.contains(zoom))
-					zoomStack.add(zoom);
-
-				if (!k.isPressed())
-					zoomStack.remove(zoom);
-			}
-		});
+		for (Zooms zoom : Zooms.values()) {
+			if (zoom.isActive() && !zoomStack.contains(zoom))
+				zoomStack.add(zoom);
+			if (!zoom.isActive())
+				zoomStack.remove(zoom);
+		}
 	}
 
 }

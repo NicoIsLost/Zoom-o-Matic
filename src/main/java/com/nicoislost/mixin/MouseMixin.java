@@ -26,9 +26,11 @@ public abstract class MouseMixin {
      */
     @Unique
     private void actionSend(Zooms zoom) {
-        ClientPlayerEntity client = MinecraftClient.getInstance().player;
-        if (ZoomOMatic.CONFIG.actionBarWriting() && client != null) {
-            client.sendMessage(Text.literal(zoom.getName() + " - " + zoom.configGet() + "%"), true);
+        if (MinecraftClient.getInstance() != null && zoom != null) {
+            ClientPlayerEntity client = MinecraftClient.getInstance().player;
+            if (ZoomOMatic.CONFIG.actionBarWriting() && client != null) {
+                client.sendMessage(Text.literal(zoom.getName() + " - " + zoom.getZoom() + "%"), true);
+            }
         }
     }
 
@@ -44,11 +46,18 @@ public abstract class MouseMixin {
             method = "onMouseScroll"
     )
     private void zoom$onMouseScroll(long window, double horizontal, double vertical, CallbackInfo ci) {
-        if(ZoomOMatic.isZooming() && MinecraftClient.getInstance().player != null){
+        Zooms zoom = ZoomOMatic.getActiveZoom();
+        if (
+                MinecraftClient.getInstance() != null &&
+                        ZoomOMatic.isZooming() &&
+                        MinecraftClient.getInstance().player != null &&
+                        zoom != null
+        ) {
             int increment = vertical > 0 ? 1 : -1;
-            int newZoom = ZoomOMatic.getActiveZoom().configGet() + increment;
+            int newZoom = 0;
+            newZoom = zoom.getZoom() + increment;
             if (newZoom >= 0 && newZoom <= 99) {
-                ZoomOMatic.getActiveZoom().configSet(newZoom);
+                zoom.setZoom(newZoom);
                 actionSend(ZoomOMatic.getActiveZoom());
             }
         }
@@ -67,6 +76,6 @@ public abstract class MouseMixin {
             )
     )
     private boolean zoom$updateMouse$smoothCameraEnabled(GameOptions instance) {
-        return (ZoomOMatic.isZooming() && ZoomOMatic.getActiveZoom().configGetSmooth()) || instance.smoothCameraEnabled;
+        return (ZoomOMatic.isZooming() && ZoomOMatic.getActiveZoom().getSmooth()) || instance.smoothCameraEnabled;
     }
 }
