@@ -18,7 +18,7 @@ public class PlayerInventoryMixin {
      */
     @Inject(at = @At("HEAD"), method = "scrollInHotbar", cancellable = true)
     private void zoom$scrollInHotbar(double scrollAmount, @NotNull CallbackInfo ci) {
-        if (ZoomOMatic.isZooming()) {
+        if (ZoomOMatic.getActiveZoom() != null) {
             ci.cancel();
         }
     }

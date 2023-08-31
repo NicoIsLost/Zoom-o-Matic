@@ -5,7 +5,6 @@ import com.nicoislost.owo.ZoomConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,13 +38,6 @@ public class ZoomOMatic implements ClientModInitializer { // Mod initializer
 
 		ClientTickEvents.START_CLIENT_TICK.register(client -> updateZoomStack());
 
-	}
-
-	/**
-	 * @return If any keys are being pressed
-	 */
-	public static boolean isZooming() {
-		return getActiveZoom() != null;
 	}
 
 	/**

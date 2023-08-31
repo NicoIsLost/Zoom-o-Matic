@@ -9,6 +9,7 @@ import net.minecraft.client.Mouse;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,12 +26,10 @@ public abstract class MouseMixin {
      * @param zoom the zoom setting
      */
     @Unique
-    private void actionSend(Zooms zoom) {
-        if (MinecraftClient.getInstance() != null && zoom != null) {
-            ClientPlayerEntity client = MinecraftClient.getInstance().player;
-            if (ZoomOMatic.CONFIG.actionBarWriting() && client != null) {
-                client.sendMessage(Text.literal(zoom.getName() + " - " + zoom.getZoom() + "%"), true);
-            }
+    private void actionSend(@NotNull Zooms zoom) {
+        ClientPlayerEntity client = MinecraftClient.getInstance().player;
+        if (ZoomOMatic.CONFIG.actionBarWriting() && client != null) {
+            client.sendMessage(Text.literal(zoom.getName() + " - " + zoom.getZoom() + "%"), true);
         }
     }
 
@@ -47,18 +46,12 @@ public abstract class MouseMixin {
     )
     private void zoom$onMouseScroll(long window, double horizontal, double vertical, CallbackInfo ci) {
         Zooms zoom = ZoomOMatic.getActiveZoom();
-        if (
-                MinecraftClient.getInstance() != null &&
-                        ZoomOMatic.isZooming() &&
-                        MinecraftClient.getInstance().player != null &&
-                        zoom != null
-        ) {
+        if (MinecraftClient.getInstance() != null && zoom != null) {
             int increment = vertical > 0 ? 1 : -1;
-            int newZoom = 0;
-            newZoom = zoom.getZoom() + increment;
+            int newZoom = zoom.getZoom() + increment;
             if (newZoom >= 0 && newZoom <= 99) {
                 zoom.setZoom(newZoom);
-                actionSend(ZoomOMatic.getActiveZoom());
+                actionSend(zoom);
             }
         }
     }
@@ -76,6 +69,6 @@ public abstract class MouseMixin {
             )
     )
     private boolean zoom$updateMouse$smoothCameraEnabled(GameOptions instance) {
-        return (ZoomOMatic.isZooming() && ZoomOMatic.getActiveZoom().getSmooth()) || instance.smoothCameraEnabled;
+        return (ZoomOMatic.getActiveZoom() != null && ZoomOMatic.getActiveZoom().getSmooth()) || instance.smoothCameraEnabled;
     }
 }

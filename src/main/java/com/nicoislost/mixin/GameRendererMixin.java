@@ -19,15 +19,9 @@ public class GameRendererMixin {
 	 */
 	@Inject(at = @At("RETURN"), method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",cancellable = true)
 	public void zoom$getFov(CallbackInfoReturnable<Double> callbackInfo) {
-		if (ZoomOMatic.isZooming()){
-			assert callbackInfo != null;
+		if (ZoomOMatic.getActiveZoom() != null){
 
-			Zooms zoom = ZoomOMatic.getActiveZoom();
-			Double d = callbackInfo.getReturnValue();
-			assert d != null;
-			assert zoom != null;
-
-			double fov = d * (1 - (double) zoom.getZoom() / 100);
+			double fov = callbackInfo.getReturnValue() * (1 - (double) ZoomOMatic.getActiveZoom().getZoom() / 100);
 
 			callbackInfo.setReturnValue(fov);
 		}

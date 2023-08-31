@@ -11,6 +11,8 @@ import com.mojang.serialization.RecordBuilder;
 import com.nicoislost.Zooms;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -36,12 +38,13 @@ public class ZoomArgumentType implements ArgumentType<Zooms> {
     }
 
     @Override
-    public Zooms parse(StringReader reader) throws CommandSyntaxException {
+    public @NotNull Zooms parse(StringReader reader) throws CommandSyntaxException {
 
         String name = reader.readUnquotedString();
 
-        if (zooms.containsKey(name)) {
-            return zooms.get(name);
+        Zooms zoom;
+        if ((zoom = zooms.get(name)) != null) {
+            return zoom;
         }
 
         throw CommandSyntaxException.BUILT_IN_EXCEPTIONS.dispatcherUnknownArgument().createWithContext(reader);
