@@ -6,8 +6,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
@@ -17,11 +15,6 @@ import java.util.ArrayList;
  */
 public class ZoomOMatic implements ClientModInitializer { // Mod initializer
 
-	public static final Logger LOGGER = LoggerFactory.getLogger(ZoomOMatic.class);
-
-	// We use owo-config to store the mod settings
-	// this is the call to the configuration
-	// https://docs.wispforest.io/owo/setup/
 	public static final ZoomConfig CONFIG = ZoomConfig.createAndLoad();
 	private static final ArrayList<Zooms> zoomStack = new ArrayList<>();
 
