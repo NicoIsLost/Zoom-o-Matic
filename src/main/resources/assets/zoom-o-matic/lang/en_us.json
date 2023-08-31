@@ -1,15 +1,14 @@
 {
-	"key.nicoislost.zoom1": "Toggle Zoom 1",
-	"key.nicoislost.zoom2": "Toggle Zoom 2",
-	"key.nicoislost.zoom3": "Toggle Zoom 3",
-	"category.nicoislost.zoom": "Zoom-o-Matic",
-	"text.config.Zoom-O-Config.option.Zoom1": "Zoom 1",
-	"text.config.Zoom-O-Config.option.Zoom1SmoothCamera": "Zoom 1 Smooth Camera",
-	"text.config.Zoom-O-Config.option.Zoom2": "Zoom 2",
-	"text.config.Zoom-O-Config.option.Zoom2SmoothCamera": "zoom 2 Smooth Camera",
-	"text.config.Zoom-O-Config.option.Zoom3": "Zoom 3",
-	"text.config.Zoom-O-Config.option.Zoom3SmoothCamera": "Zoom 3 Smooth Camera",
-	"command.exception.between": "The value must be between 1 and 99",
-	"text.config.Zoom-O-Config.option.actionBarWriting": "Write to action bar",
-	"text.config.Zoom-O-Config.title": "Zoom-o-Matic Configuration"
+	"key.zoom-o-matic.zoom1": "Toggle Zoom 1",
+	"key.zoom-o-matic.zoom2": "Toggle Zoom 2",
+	"key.zoom-o-matic.zoom3": "Toggle Zoom 3",
+	"category.zoom-o-matic.zoom": "Zoom-o-Matic",
+	"text.config.zoom-o-config.option.Zoom1": "Zoom 1",
+	"text.config.zoom-o-config.option.Zoom1SmoothCamera": "Zoom 1 Smooth Camera",
+	"text.config.zoom-o-config.option.Zoom2": "Zoom 2",
+	"text.config.zoom-o-config.option.Zoom2SmoothCamera": "zoom 2 Smooth Camera",
+	"text.config.zoom-o-config.option.Zoom3": "Zoom 3",
+	"text.config.zoom-o-config.option.Zoom3SmoothCamera": "Zoom 3 Smooth Camera",
+	"text.config.zoom-o-config.option.actionBarWriting": "Write to action bar",
+	"text.config.zoom-o-config.title": "Zoom-o-Matic Configuration"
 }

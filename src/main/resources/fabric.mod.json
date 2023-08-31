@@ -39,7 +39,7 @@
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"com.nicoislost.ZoomO"
+          "com.nicoislost.ZoomOMatic"
 		]
 	},
 	"mixins": [
